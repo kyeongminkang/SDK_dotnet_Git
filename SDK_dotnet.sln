@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK_dotnet", "SDK_dotnet\SDK_dotnet.csproj", "{5588F947-EFE2-48D3-92DE-15A18DFEE809}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5588F947-EFE2-48D3-92DE-15A18DFEE809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5588F947-EFE2-48D3-92DE-15A18DFEE809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5588F947-EFE2-48D3-92DE-15A18DFEE809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5588F947-EFE2-48D3-92DE-15A18DFEE809}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AAFD6D27-4B50-4A52-A857-290AA3DCF15F}
+	EndGlobalSection
+EndGlobal
