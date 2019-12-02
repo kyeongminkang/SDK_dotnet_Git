@@ -1,13 +1,11 @@
-﻿using GluwProSDK.Entity;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace GluwProSDK.Models
+namespace SDK_dotnet.Models
 {
     public sealed class TransactionResponse
     {
-        public string TxnHash { get; set;}
+        public string TxnHash { get; set; }
 
         public string Amount { get; set; }
 

@@ -1,10 +1,7 @@
-﻿using GluwProSDK.Entity;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace GluwProSDK.Models
+namespace SDK_dotnet.Models
 {
     internal sealed class TransactionRequest
     {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GluwProSDK.Entity
+﻿namespace SDK_dotnet.Models
 {
     public enum EPaymentCurrency
     {

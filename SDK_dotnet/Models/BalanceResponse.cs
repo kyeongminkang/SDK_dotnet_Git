@@ -1,9 +1,6 @@
-﻿using GluwProSDK.Entity;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace GluwProSDK.Models
+namespace SDK_dotnet.Models
 {
     public sealed class BalanceResponse
     {
@@ -11,6 +8,7 @@ namespace GluwProSDK.Models
 
         public ECurrency? Currency { get; set; }
 
+        [Range(0, ulong.MaxValue)]
         public long? Nonce { get; set; }
     }
 }
