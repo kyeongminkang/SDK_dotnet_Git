@@ -168,7 +168,7 @@ namespace SDK_dotnet
             }
         }
 
-        public async Task<Result<HttpStatusCode>> PostTransactionAsync(
+        public async Task<bool> PostTransactionAsync(
             ECurrency? currency, 
             string amount, 
             string target, 
@@ -189,8 +189,6 @@ namespace SDK_dotnet
             {
                 throw new ArgumentNullException(nameof(currency));
             }
-
-            var result = new Result<HttpStatusCode>();
 
             var requestUri = $"{mBaseUrl}/v1/Transactions";
 
@@ -234,10 +232,7 @@ namespace SDK_dotnet
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    result.IsSuccess = true;
-                    result.Data = response.StatusCode;
-
-                    return result;
+                    return true;
                 }
                 else
                 {
