@@ -1,6 +1,7 @@
 ﻿using Nethereum.ABI;
 using Nethereum.Signer;
 using SDK_dotnet.Models;
+using SDK_dotnet.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDK_dotnet.Client
+namespace SDK_dotnet
 {
-    public sealed class Client
+    public sealed class GluwaClient
     {
         private readonly bool mIsDevEnv;
         private readonly string mApiKey;
@@ -23,7 +24,14 @@ namespace SDK_dotnet.Client
         private readonly string mBaseUrl;
         private readonly string mWebhookSecretKey;
 
-        public Client(string apiKey, string secretKey, string address, string privateKey, bool isDevEnv, string webhookSecretKey)
+        public GluwaClient(
+            string apiKey, 
+            string secretKey, 
+            string address, 
+            string privateKey, 
+            bool isDevEnv, 
+            string webhookSecretKey
+            )
         {
             if (string.IsNullOrEmpty(apiKey))
             {
@@ -59,7 +67,7 @@ namespace SDK_dotnet.Client
             }
         }
 
-        public async Task<Result<BalanceResponse>> getAddressAsync(ECurrency? currency)
+        public async Task<Result<BalanceResponse>> GetAddressAsync(ECurrency? currency)
         {
             var result = new Result<BalanceResponse>();
             string requestUri = $"{mBaseUrl}/v1/{currency}/Addresses/{mAddress}";
@@ -82,8 +90,12 @@ namespace SDK_dotnet.Client
             }
         }
 
-        public async Task<Result<List<TransactionResponse>>> getListTransactionsAsync(ECurrency? currency,
-            uint limit = 100, ETransactionStatusFilter status = ETransactionStatusFilter.Confirmed, uint offset = 0)
+        public async Task<Result<List<TransactionResponse>>> GetListTransactionsAsync(
+            ECurrency? currency,
+            uint limit = 100, 
+            ETransactionStatusFilter status = ETransactionStatusFilter.Confirmed, 
+            uint offset = 0
+            )
         {
             var result = new Result<List<TransactionResponse>>();
 
@@ -98,12 +110,9 @@ namespace SDK_dotnet.Client
             {
                 queryParams.Add($"limit={limit}");
             }
-            if (status != null)
-            {
-                queryParams.Add($"status={status}");
-            }
             if (queryParams.Any())
             {
+                queryParams.Add($"status={status}");
                 requestUri = $"{requestUri}?{string.Join("&", queryParams)}";
             }
 
@@ -159,7 +168,14 @@ namespace SDK_dotnet.Client
             }
         }
 
-        public async Task<Result<HttpStatusCode>> postTransactionAsync(ECurrency? currency, string amount, string target, string merchantOrderID = "", string note = "", int expiry = 1800)
+        public async Task<Result<HttpStatusCode>> PostTransactionAsync(
+            ECurrency? currency, 
+            string amount, 
+            string target, 
+            string merchantOrderID = "", 
+            string note = "", 
+            int expiry = 1800
+            )
         {
             if (string.IsNullOrEmpty(amount))
             {
@@ -219,7 +235,7 @@ namespace SDK_dotnet.Client
                 if (response.IsSuccessStatusCode)
                 {
                     result.IsSuccess = true;
-                    result.Data = await response.Content.ReadAsAsync<HttpStatusCode>();
+                    result.Data = response.StatusCode;
 
                     return result;
                 }
@@ -230,9 +246,14 @@ namespace SDK_dotnet.Client
             }
         }
 
-        public async Task<Result<byte[]>> getPaymentQRCodeAsync(EPaymentCurrency? currency, 
-            string amount, string format = "image/png", string note = "", 
-            string merchantOrderID = "", int expiry = 1800)
+        public async Task<Result<byte[]>> GetPaymentQRCodeAsync(
+            EPaymentCurrency? currency, 
+            string amount, 
+            string format = "image/png", 
+            string note = "", 
+            string merchantOrderID = "", 
+            int expiry = 1800
+            )
         {
             if(currency == null)
             {
@@ -246,9 +267,6 @@ namespace SDK_dotnet.Client
             var result = new Result<byte[]>();
 
             var requestUri = $"{mBaseUrl}/v1/QRCode";
-
-            byte[] formatByte = new byte[format.Length];
-            formatByte = Encoding.UTF8.GetBytes(format);
 
             var queryParams = new List<string>();
             if (format != null)
@@ -356,8 +374,7 @@ namespace SDK_dotnet.Client
             string signature = signer.EncodeUTF8AndSign(Timestamp, new EthECKey(mPrivateKey));
 
             string gluwaSignature = $"{Timestamp}.{signature}";
-            byte[] gluwaSignatureByte = new byte[gluwaSignature.Length];
-            gluwaSignatureByte = Encoding.UTF8.GetBytes(gluwaSignature);
+            byte[] gluwaSignatureByte = Encoding.UTF8.GetBytes(gluwaSignature);
             string encodedData = System.Convert.ToBase64String(gluwaSignatureByte);
 
             return encodedData;

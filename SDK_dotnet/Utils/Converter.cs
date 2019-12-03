@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Numerics;
 
-namespace SDK_dotnet
+namespace SDK_dotnet.Utils
 {
     internal static class Converter
     {

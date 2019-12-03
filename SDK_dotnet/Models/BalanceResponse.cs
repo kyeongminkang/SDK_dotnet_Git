@@ -9,6 +9,6 @@ namespace SDK_dotnet.Models
         public ECurrency? Currency { get; set; }
 
         [Range(0, ulong.MaxValue)]
-        public long? Nonce { get; set; }
+        public ulong? Nonce { get; set; }
     }
 }

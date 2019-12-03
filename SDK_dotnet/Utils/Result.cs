@@ -1,4 +1,4 @@
-﻿namespace SDK_dotnet
+﻿namespace SDK_dotnet.Utils
 {
     public sealed class Result<T>
     {
