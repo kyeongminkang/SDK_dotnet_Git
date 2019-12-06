@@ -25,11 +25,11 @@ namespace SDK_dotnet
         private readonly string mWebhookSecretKey;
 
         public GluwaClient(
-            string apiKey, 
-            string secretKey, 
-            string address, 
-            string privateKey, 
-            bool isDevEnv, 
+            string apiKey,
+            string secretKey,
+            string address,
+            string privateKey,
+            bool isDevEnv,
             string webhookSecretKey
             )
         {
@@ -92,8 +92,8 @@ namespace SDK_dotnet
 
         public async Task<Result<List<TransactionResponse>>> GetListTransactionsAsync(
             ECurrency? currency,
-            uint limit = 100, 
-            ETransactionStatusFilter status = ETransactionStatusFilter.Confirmed, 
+            uint limit = 100,
+            ETransactionStatusFilter status = ETransactionStatusFilter.Confirmed,
             uint offset = 0
             )
         {
@@ -169,11 +169,11 @@ namespace SDK_dotnet
         }
 
         public async Task<bool> PostTransactionAsync(
-            ECurrency? currency, 
-            string amount, 
-            string target, 
-            string merchantOrderID = "", 
-            string note = "", 
+            ECurrency? currency,
+            string amount,
+            string target,
+            string merchantOrderID = "",
+            string note = "",
             int expiry = 1800
             )
         {
@@ -242,15 +242,15 @@ namespace SDK_dotnet
         }
 
         public async Task<Result<byte[]>> GetPaymentQRCodeAsync(
-            EPaymentCurrency? currency, 
-            string amount, 
-            string format = "image/png", 
-            string note = "", 
-            string merchantOrderID = "", 
+            EPaymentCurrency? currency,
+            string amount,
+            string format = "image/png",
+            string note = "",
+            string merchantOrderID = "",
             int expiry = 1800
             )
         {
-            if(currency == null)
+            if (currency == null)
             {
                 throw new ArgumentNullException(nameof(currency));
             }
@@ -269,7 +269,7 @@ namespace SDK_dotnet
                 queryParams.Add($"format={format}");
                 requestUri = $"{requestUri}?{string.Join("&", queryParams)}";
             }
-           
+
             QRCodeRequest bodyParams = new QRCodeRequest()
             {
                 Signature = getTimestampSignature(),
@@ -332,7 +332,7 @@ namespace SDK_dotnet
             {
                 return true;
             }
-                return false;
+            return false;
         }
 
         private string getContractAddressOrNull(ECurrency? currency, bool mIsDevEnv)
