@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <ApplicationIcon></ApplicationIcon>
+    <Win32Resource />
+    <Description></Description>
+    <PackageId>SDK_dotnet</PackageId>
+    <Authors>SDK_dotnet</Authors>
+    <Company>SDK_dotnet</Company>
+    <Product>SDK_dotnet</Product>
+    <OutputType>WinExe</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
